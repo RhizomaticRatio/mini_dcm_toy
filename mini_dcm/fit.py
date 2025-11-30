@@ -23,5 +23,6 @@ def fit_model(y, u, mask):
         total_params += len(beta)
 
     sigma2 = total_rss / total_observations
+    sigma2 = max(sigma2, 1e-8) #to avoid log(0)
     log_likelihood = -0.5 * total_observations * (np.log(2 * np.pi * sigma2) + 1)
     return A_hat, log_likelihood, total_params, total_observations
